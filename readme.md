@@ -94,7 +94,7 @@ Sometimes if a class requires too many  dependencies, maybe it's a sign that thi
 
 If you notice that you often need to debug a specific class, you should refactor it.
 
-####TagTagCity
+####TTC
 
 The fact that we inject the database layer into the controller through the constructor make them testable.
 
@@ -151,7 +151,7 @@ Explanation:
 
 Unit Tests are written from a programmers perspective. They are made to ensure that a particular method (or a unit) of a class performs a set of specific tasks.
 
-By default Laravel use [phpunit](http://phpunit.de/) but we could decide to select an other framework like [phpspec](http://www.phpspec.net/) which is more focused on communication. [intro](https://laracasts.com/lessons/phpspec-is-so-good)
+By default Laravel use [PhpUnit](http://phpunit.de/) but we could decide to select an other framework like [PhpSpec](http://www.phpspec.net/) which is more focused on communication. [intro](https://laracasts.com/lessons/phpspec-is-so-good)
 
 Every classes should be tested in isolation. (using mocks for example).
 
@@ -159,7 +159,7 @@ Testing one object, and one only (if your test fails, you know exactly where to 
 
 Test files are located at app/tests directory and your test structure should mirror your application structure.
 
-ex: `app/tests/TagTagCity/Controllers/Partners/LocationControllerTest.php`
+ex: `app/tests/Foo/Controllers/Partners/LocationControllerTest.php`
 
 It isn't an obligation some people structure their tests according to the test type eg: 
 
@@ -190,7 +190,7 @@ dummy example phpunit
 
 dummy example phpspec	
 	
-	function it_fetches_items_in_array_until_key(Place $place)
+	function it_fetches_items_in_array_until_key()
     {
     	$names = ['Taylor', 'Dayle', 'Matthew'];
     	
@@ -227,7 +227,7 @@ edit: Usually controllers are tested with [Behat](http://behat.org/) or [Codecep
     	{
         	parent::setUp();
         	
-        	$this->place = $this->mock('TagTagCity\Repositories\Place\PlaceRepositoryInterface');
+        	$this->place = $this->mock('Foo\Repositories\Place\PlaceRepositoryInterface');
     	}
 
     	public function mock($class)
@@ -250,7 +250,7 @@ edit: Usually controllers are tested with [Behat](http://behat.org/) or [Codecep
     	public function testGetPlaceDetailsById()
     	{
     		//Arrange
-        	$place_details = Factory::make('TagTagCity\Repositories\Place\Place', ['id'=>1]);
+        	$place_details = Factory::make('Foo\Repositories\Place\Place', ['id'=>1]);
 
         	$this->place
             	 ->shouldReceive('findPlaceDetailsById')
@@ -332,7 +332,7 @@ Example of acceptance tests:
 
 ###Continuous Integration
 
-After every merges we can chose an external service [eg Travis](http://docs.travis-ci.com) that rebuilt the application on their server (in an environment that's as close to production as possible) and run all tests and send us the results.
+After every merges we can chose an external service (eg: [Travis](http://docs.travis-ci.com)) that rebuilt the application on their server (in an environment that's as close to production as possible) and run all tests and send us the results.
 
 
 ####Notes
@@ -349,21 +349,23 @@ After every merges we can chose an external service [eg Travis](http://docs.trav
 	If you use factories: `use Way\Tests\Factory;` just add `"doctrine/dbal": "2.4.*"` to your composer.json file, and run `composer update`.
 	
 	
-I only read testing stuffs for two weeks and I think that I still have some way to become confortable with this subject. 
+I only read testing stuffs for two weeks and I think that I still have some way to become confortable with this subject.
+
+#####Team 
 
 For now we need to concert ourselves to decide what we want to test and how. 
 
 Our main goal is to have our code looking like it was written by a single person. Moreover, the list of features it provides should be understandable just by looking at the test files.
 
-##Links/Ressources
+##Links / Ressources
 
--	Testing decoded
+-	Testing decoded (Jeffrey Way)
 
 -	[Video of TDD explanation by Jeffrey Way](http://code.tutsplus.com/tutorials/test-driven-development-in-php-first-steps--net-25796)
 
--	[phpunit doc](http://phpunit.de/manual/3.7/en/index.html"PhpUnit doc")
+-	[PhpUnit doc](http://phpunit.de/manual/3.7/en/index.html"PhpUnit doc")
 
--	[phpspec doc](http://www.phpspec.net/docs/introduction.html	)
+-	[PhpSpec doc](http://www.phpspec.net/docs/introduction.html	)
 
 -	[Laravel-test-helpers](https://github.com/JeffreyWay/Laravel-Test-Helpers"Laravel-test-helpers doc")
 
@@ -373,21 +375,21 @@ Our main goal is to have our code looking like it was written by a single person
 
 -	[Laravel doc:test](http://laravel.com/docs/testing"Laravel doc test")
 
--	[mockery doc](https://github.com/padraic/mockery"Mockery doc")
+-	[Mockery doc](https://github.com/padraic/mockery"Mockery doc")
 
 -	[Mockery explanation](http://culttt.com/2013/07/22/getting-started-with-mockery/)
 
--	[Mock/Stubs](http://martinfowler.com/articles/mocksArentStubs.html"Mock/Stubs")
-
+-	[Mock/Stubs](http://martinfowler.com/articles/mocksArentStubs.html"Mock/Stubs") 
+	
 	Difference between Mocks and Stubs. (Examples are in Java, but the principles make sense with any object-oriented language.)
 
 -	[Explanation of IoC container and unit testing by Taylor Otwell](http://taylorotwell.com/full-ioc-unit-testing-with-laravel/")
 
 -	[Explanation of IoC container by Dayle Rees](https://github.com/daylerees/inversion-of-control-container-example") 
-
-	All explanations are in the tests files.
 	
 -	[Test driven development example by Dayle Rees](https://github.com/daylerees/test-driven-development-example)
+
+	All explanations are in the tests files.
 
 -	[Better testing in Laravel by Jeffrey Way](http://www.youtube.com/watch?v=ajoFwWwSHTI)
 
