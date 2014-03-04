@@ -309,7 +309,7 @@ Example of acceptance tests:
 		$I = new WebGuy($scenario);
 		$I->wantTo('Check the home page and go to map page');
 		$I->amOnPage('/');
-		$I->see('TagTagCity', 'h1');
+		$I->see('Foo', 'h1');
 		$I->click('#locate_btn');
 		$I->amOnPage('/map');
 
