@@ -1,6 +1,6 @@
 ##TDD
 
-![Smaller icon](http://upload.wikimedia.org/wikipedia/en/9/9c/Test-driven_development.PNG"TDD cycle")
+![Smaller icon](http://upload.wikimedia.org/wikipedia/en/9/9c/Test-driven_development.PNG "TDD cycle")
 
 Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: 
 
