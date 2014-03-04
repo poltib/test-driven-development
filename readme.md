@@ -382,10 +382,13 @@ Our main goal is to have our code looking like it was written by a single person
 	Difference between Mocks and Stubs. (Examples are in Java, but the principles make sense with any object-oriented language.)
 
 -	[Explanation of IoC container and unit testing by Taylor Otwell](http://taylorotwell.com/full-ioc-unit-testing-with-laravel/")
+
 -	[Explanation of IoC container by Dayle Rees](https://github.com/daylerees/inversion-of-control-container-example") 
 
 	All explanations are in the tests files.
 	
 -	[Test driven development example by Dayle Rees](https://github.com/daylerees/test-driven-development-example)
+
 -	[Better testing in Laravel by Jeffrey Way](http://www.youtube.com/watch?v=ajoFwWwSHTI)
+
 -	[Laravel framework tests](https://github.com/laravel/framework/tree/master/tests)
