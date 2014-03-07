@@ -211,7 +211,10 @@ Unfortunately the documentation is light and to fully understand it you need to 
 
 Like unit testing, functional ensure that the code does what you expect. But functional can trigger multiple piece of your application.
 
-edit: Usually controllers are tested with [Behat](http://behat.org/) or [Codeception](http://codeception.com/)
+edit: Usually controllers are tested with [Behat](http://behat.org/) or [Codeception](http://codeception.com/).
+
+-> [Behat good introduction](https://tutsplus.com/tutorial/behat-for-the-rest-of-us/)
+
 
     <?php
 
@@ -336,6 +339,20 @@ After every merges we can chose an external service (eg: [Travis](http://docs.tr
 
 
 #### Notes
+
+#### Xdebug
+
+We have it but we don't use it.
+
+#### Bugsnag
+
+[Bugsnag](https://bugsnag.com) is a service that notify you when you website crash.
+
+#### Phpstorm testing
+
+-> [PhpStorm test workflow](https://laracasts.com/lessons/phpstorm-testing-workflow)
+
+#### Tips and thoughts
 
 -   Test tips
     -   Don't test more than one file per test file
