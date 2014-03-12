@@ -335,7 +335,7 @@ Example of acceptance tests:
 
 ### Continuous Integration
 
-After every merges we can chose an external service (eg: [Travis](http://docs.travis-ci.com)) that rebuilt the application on their server (in an environment that's as close to production as possible) and run all tests and send us the results.
+After every merges/commit we can chose an external service (eg: [Travis](http://docs.travis-ci.com)) that rebuilt the application on their server (in an environment that's as close to production as possible) and run all tests and send us the results.
 
 
 #### Notes
@@ -346,7 +346,7 @@ We have it but we don't use it.
 
 #### Bugsnag
 
-[Bugsnag](https://bugsnag.com) is a service that notify you when you website crash.
+[Bugsnag](https://bugsnag.com) is a service that send notifications when you website crash.
 
 #### Phpstorm testing
 
@@ -370,7 +370,7 @@ I only read testing stuffs for two weeks and I think that I still have some way 
 
 ##### Team 
 
-some people do acceptance test for Controlers/Routes/views and unit test for Models/
+Some people do acceptance test for Controlers/Routes/views and unit test for Models/
 
 For now we need to concert ourselves to decide what we want to test and how. 
 
@@ -400,11 +400,15 @@ Our main goal is to have our code looking like it was written by a single person
 
 -   [Mockery doc](https://github.com/padraic/mockery"Mockery doc")
 
+-   [AspectMock mocking framework](https://github.com/Codeception/AspectMock)
+
 -   [Mockery explanation](http://culttt.com/2013/07/22/getting-started-with-mockery/)
 
 -   [Mock/Stubs](http://martinfowler.com/articles/mocksArentStubs.html"Mock/Stubs") 
     
     Difference between Mocks and Stubs. (Examples are in Java, but the principles make sense with any object-oriented language.)
+
+-   [Mock/Stubs/fakes](http://stackoverflow.com/questions/346372/whats-the-difference-between-faking-mocking-and-stubbing?rq=1)
 
 -   [Explanation of IoC container and unit testing by Taylor Otwell](http://taylorotwell.com/full-ioc-unit-testing-with-laravel/")
 
