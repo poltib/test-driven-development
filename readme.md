@@ -205,6 +205,134 @@ This is not a huge advantage but using it can boost your work.
 
 Unfortunately the documentation is light and to fully understand it you need to practise and make some tests.
 
+#### Behat
+
+### Set up in Laravel with sqlite in-memory db
+
+Composer.json
+
+	"require-dev": {
+        "behat/behat": "2.5.*",
+        "behat/mink": "1.5.*@stable",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*"
+	},
+	
+At the root of the project add `behat.yml` with this content in order to configure behat
+
+	default:
+    	paths:
+        	features: app/tests/acceptance
+    	extensions:
+        	Behat\MinkExtension\Extension:
+            	goutte: ~
+            	base_url: http://your_local_url.dev
+            	
+Then run in the terminal `behat --init`.
+
+Now to set up a sqlite in-memory database you need to add `app/config/testing/database.php`
+
+	<?php
+
+	return [
+    	'default' => 'sqlite',
+
+    	'connections' => [
+        	'sqlite' => [
+            	'driver' => 'sqlite',
+            	'database' => ':memory:',
+            	'prefix' => '',
+        	]
+    	]
+	];
+
+And finally in `app/tests/acceptance/bootstrap/FeatureContext.php` you need to have something like this:
+
+(we just add three methods to boot the Laravel application, run the migrations and before every features refresh the database.)
+
+	<?php
+
+	use Behat\Behat\Context\ClosuredContextInterface,
+    	Behat\Behat\Context\TranslatedContextInterface,
+    	Behat\Behat\Context\BehatContext,
+    	Behat\Behat\Exception\PendingException;
+	use Behat\Gherkin\Node\PyStringNode,
+    	Behat\Gherkin\Node\TableNode;
+	use Behat\MinkExtension\Context\MinkContext;
+
+	//
+	// Require 3rd-party libraries here:
+	//
+	//   require_once 'PHPUnit/Autoload.php';
+	//   require_once 'PHPUnit/Framework/Assert/Functions.php';
+	//
+
+	/**
+ 	 * Features context.
+ 	 */
+	class FeatureContext extends MinkContext
+	{
+    	/**
+    	 * Initializes context.
+    	 * Every scenario gets its own context object.
+    	 *
+    	 * @param array $parameters context parameters (set them up through behat.yml)
+    	 */
+    	public function __construct(array $parameters)
+    	{
+        	// Initialize your context here
+    	}
+
+    	/**
+    	 * @static
+    	 * @beforeSuite
+    	 */
+    	public static function bootstrapLaravel()
+    	{
+        	// set Laravel environment to testing to enable in-memory database
+        	$unitTesting = true;
+        	$testEnvironment = 'testing';
+        	require_once __DIR__.'/../../../../bootstrap/start.php';
+
+        	Mail::pretend(true);
+    	}
+
+    	/**
+    	 * @static
+    	 * @beforeSuite
+    	 */
+    	public static function setUpDb()
+    	{
+        	Artisan::call('migrate:install');
+    	}
+
+
+    	/**
+     	 * @static
+    	 * @beforeFeature
+    	 */
+    	public static function prepDb()
+    	{
+        	Artisan::call('migrate:refresh');
+        	Artisan::call('db:seed');
+    	}
+
+		//
+		// Place your definition and hook methods here:
+		//
+		//    /**
+		//     * @Given /^I have done something with "([^"]*)"$/
+		//     */
+		//    public function iHaveDoneSomethingWith($argument)
+		//    {
+		//        doSomethingWith($argument);
+		//    }
+		//
+	}
+
+It's the same if you use BehatContext juste extend `BehatContext`.
+
+That's it! you are ready to create your features now.
 
 
 #### Functional (controllers) testing
