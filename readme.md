@@ -207,7 +207,7 @@ Unfortunately the documentation is light and to fully understand it you need to 
 
 #### Behat
 
-### Set up in Laravel with sqlite in-memory db
+##### Set up in Laravel with sqlite in-memory db
 
 Composer.json
 
@@ -246,42 +246,9 @@ Now to set up a sqlite in-memory database you need to add `app/config/testing/da
     	]
 	];
 
-And finally in `app/tests/acceptance/bootstrap/FeatureContext.php` you need to have something like this:
+And finally in `app/tests/acceptance/bootstrap/FeatureContext.php` you need to add these three methods: 
 
-(we just add three methods to boot the Laravel application, run the migrations and before every features refresh the database.)
-
-	<?php
-
-	use Behat\Behat\Context\ClosuredContextInterface,
-    	Behat\Behat\Context\TranslatedContextInterface,
-    	Behat\Behat\Context\BehatContext,
-    	Behat\Behat\Exception\PendingException;
-	use Behat\Gherkin\Node\PyStringNode,
-    	Behat\Gherkin\Node\TableNode;
-	use Behat\MinkExtension\Context\MinkContext;
-
-	//
-	// Require 3rd-party libraries here:
-	//
-	//   require_once 'PHPUnit/Autoload.php';
-	//   require_once 'PHPUnit/Framework/Assert/Functions.php';
-	//
-
-	/**
- 	 * Features context.
- 	 */
-	class FeatureContext extends MinkContext
-	{
-    	/**
-    	 * Initializes context.
-    	 * Every scenario gets its own context object.
-    	 *
-    	 * @param array $parameters context parameters (set them up through behat.yml)
-    	 */
-    	public function __construct(array $parameters)
-    	{
-        	// Initialize your context here
-    	}
+-	to boot the Laravel application.
 
     	/**
     	 * @static
@@ -289,13 +256,15 @@ And finally in `app/tests/acceptance/bootstrap/FeatureContext.php` you need to h
     	 */
     	public static function bootstrapLaravel()
     	{
-        	// set Laravel environment to testing to enable in-memory database
         	$unitTesting = true;
         	$testEnvironment = 'testing';
         	require_once __DIR__.'/../../../../bootstrap/start.php';
 
         	Mail::pretend(true);
     	}
+
+
+-	run the migrations
 
     	/**
     	 * @static
@@ -307,6 +276,8 @@ And finally in `app/tests/acceptance/bootstrap/FeatureContext.php` you need to h
     	}
 
 
+-	refresh the database before every features
+ 
     	/**
      	 * @static
     	 * @beforeFeature
@@ -317,20 +288,6 @@ And finally in `app/tests/acceptance/bootstrap/FeatureContext.php` you need to h
         	Artisan::call('db:seed');
     	}
 
-		//
-		// Place your definition and hook methods here:
-		//
-		//    /**
-		//     * @Given /^I have done something with "([^"]*)"$/
-		//     */
-		//    public function iHaveDoneSomethingWith($argument)
-		//    {
-		//        doSomethingWith($argument);
-		//    }
-		//
-	}
-
-It's the same if you use BehatContext juste extend `BehatContext`.
 
 That's it! you are ready to create your features now.
 
